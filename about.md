@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I have been working with Java since 2000, and with scala since 2012. 
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself. 
+Here will be more info, but later. 
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[blog at forteamwork.ru](mailto:blog@forteamwork.ru)
