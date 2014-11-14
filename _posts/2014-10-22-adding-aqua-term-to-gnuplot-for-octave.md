@@ -15,23 +15,23 @@ During Octave tutorial got an error:
 
 <!--more-->
 
-```bash
+~~~ bash
 octave:> hist(w)
 
 gnuplot> set terminal aqua enhanced title "Figure 1" size 560 420  font "*,6" dashlength 1
                       ^
          line 0: unknown or ambiguous terminal type; type just 'set terminal' for a list
-```
+~~~
 
 [This][1] helps me. Answer from mackuntu
 
-```bash
+~~~ bash
 $ sudo ln -s /Library/Frameworks/AquaTerm.framework/Versions/A/AquaTerm /usr/local/lib/libaquaterm.dylib
 $ sudo ln -s /Library/Frameworks/AquaTerm.framework/Versions/A/AquaTerm /usr/local/lib/libaquaterm.1.0.0.dylib
 $ sudo mkdir /usr/local/include/aquaterm
 $ sudo ln -s /Library/Frameworks/AquaTerm.framework/Versions/A/Headers/* /usr/local/include/aquaterm/.
 $ brew install gnuplot --with-aquaterm
-```
+~~~
 
 &nbsp;
 
