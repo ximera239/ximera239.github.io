@@ -37,6 +37,7 @@ Live in Germany, working for Yandex Saint-Petersburg at "Home Office", flying to
   *SW Developer/Consultant (remote)* at [Yandex](http://www.yandex.ru/) 
 
   SW developer and consultant in Revews project (reviews for vertical services Yandex.Auto, Yandex.Rabota, Yandex.Store, Yandex.Maps, Yandex.Kino, Yandex.City)
+  
   *scala, akka, hadoop/hbase, cassandra, mysql*
 
 * **11.2010 - 1.2014** 
