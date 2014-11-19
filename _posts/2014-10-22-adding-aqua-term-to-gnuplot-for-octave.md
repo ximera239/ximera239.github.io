@@ -13,8 +13,6 @@ tags:
 ---
 During Octave tutorial got an error:
 
-<!--more-->
-
 ~~~ bash
 octave:> hist(w)
 
