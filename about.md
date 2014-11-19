@@ -5,9 +5,13 @@ permalink: /about/
 
 ---
 Hi, my name is Evgeny.
+
 I have been working with Java since 2000, and with scala since 2012. I'm curious about storing and processing data. I had working experience with [MongoDB](http://www.mongodb.com/), [Hadoop](https://hadoop.apache.org/)/[HBase](https://hbase.apache.org/) ([Cloudera CDH](http://www.cloudera.com/content/cloudera/en/products-and-services/cdh.html)), [Cassandra](http://cassandra.apache.org/) and with [MySQL](http://www.mysql.com/) and [Oracle](http://www.oracle.com/index.html)
+
 Except of working experience I experimented also with [Kafka](http://kafka.apache.org/) and [Samza](http://samza.incubator.apache.org/)
+
 Also I touched Android a bit, created and published couple applications, [not so serious](https://play.google.com/store/apps/details?id=ru.forteamwork.dfc.a1), but was interesting.  
+
 At work and in personal projects I use mostly scala with akka, Intellij IDEA as IDE, Mercurial as source control and different ticket trackers. Feel myself comfortable with OS X and Ubuntu as working environment.
 
 Live in Germany, working for Yandex Saint-Petersburg at "Home Office", flying to Russian and back again for 2-3 weeks per couple of months (and would prefer to keep some kind of such mobility because of serious personal reasons) 
