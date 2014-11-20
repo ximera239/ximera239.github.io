@@ -12,9 +12,11 @@ Except of working experience I experimented also with [Kafka](http://kafka.apach
 
 Also I touched Android a bit, created and published couple applications, [not so serious](https://play.google.com/store/apps/details?id=ru.forteamwork.dfc.a1), but was interesting.  
 
-At work and in personal projects I use mostly scala with akka, Intellij IDEA as IDE, Mercurial as source control and different ticket trackers. Feel myself comfortable with OS X and Ubuntu as working environment.
+And I had setup and destroyed environment for CI process - [Jira](https://www.atlassian.com/software/jira) for ticket processing, [Confluence](https://www.atlassian.com/software/confluence) as documentation base, [Stash](https://www.atlassian.com/software/stash) to manage repository. Jenkins to create builds.  
 
-Live in Germany, working for Yandex Saint-Petersburg at "Home Office", flying to Russian and back again for 2-3 weeks per couple of months (and would prefer to keep some kind of such mobility because of serious personal reasons) 
+At work and in personal projects I use mostly [scala](http://scala-lang.org/) with [akka](http://akka.io/), [Intellij IDEA](https://www.jetbrains.com/idea/) as IDE, [Mercurial](http://mercurial.selenic.com/) as source control and different ticket trackers. Feel myself comfortable with [OS X](https://www.apple.com/osx/) and [Ubuntu](http://www.ubuntu.com/) as working environment.
+
+Live in Germany, work for [Yandex]((http://www.yandex.ru/)) Saint-Petersburg at "Home Office", flying to Russian and back again for 2-3 weeks per couple of months (and would prefer to keep some kind of such mobility because of serious personal reasons) 
 
 ### More Information
 
