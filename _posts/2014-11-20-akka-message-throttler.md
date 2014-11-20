@@ -15,7 +15,7 @@ Today found in our sources solution for controlling messages rps from one actor 
 I know about maxima - use things which helps to solve the problem, but I do not think that much of threads here and there - good solution anyway. So I tried to write my own throttler, akka-style.
 Yes, I found [experimental](http://doc.akka.io/docs/akka/snapshot/contrib/throttle.html) feature in AKKA 2.4. But not far ago I saw the situation when experimental feature does not work. So my bicycle is the best ))
 
-```scala
+~~~ scala
 import akka.actor.{Actor, Props}
 
 import scala.concurrent.duration.{FiniteDuration, _}
@@ -103,4 +103,4 @@ object Throttler {
       onError,
       tick))
 }
-```  
+~~~  
