@@ -77,4 +77,4 @@ IPTV project. Team work management (works tracking, status control, risk managem
 
 ### Contact me
 
-[blog at forteamwork.ru](mailto:blog@forteamwork.ru)
+[evgeny at zhoga.com](mailto:evgeny@zhoga.com)
