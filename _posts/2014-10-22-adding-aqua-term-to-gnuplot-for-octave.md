@@ -11,7 +11,7 @@ tags:
   - ML
 
 ---
-During Octave tutorial got an error:
+During Octave tutorial I got an error:
 
 ~~~ bash
 octave:> hist(w)
@@ -21,7 +21,7 @@ gnuplot> set terminal aqua enhanced title "Figure 1" size 560 420  font "*,6" da
          line 0: unknown or ambiguous terminal type; type just 'set terminal' for a list
 ~~~
 
-[This][1] helps me. Answer from mackuntu
+[This][1] helps me. See answer from mackuntu.
 
 ~~~ bash
 $ sudo ln -s /Library/Frameworks/AquaTerm.framework/Versions/A/AquaTerm /usr/local/lib/libaquaterm.dylib

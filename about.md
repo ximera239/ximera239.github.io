@@ -6,17 +6,17 @@ permalink: /about/
 ---
 Hi, my name is Evgeny.
 
-I have been working with Java since 2000, and with scala since 2012. I'm curious about storing and processing data. I had working experience with [MongoDB](http://www.mongodb.com/), [Hadoop](https://hadoop.apache.org/)/[HBase](https://hbase.apache.org/) ([Cloudera CDH](http://www.cloudera.com/content/cloudera/en/products-and-services/cdh.html)), [Cassandra](http://cassandra.apache.org/) and with [MySQL](http://www.mysql.com/) and [Oracle](http://www.oracle.com/index.html)
+I have been working with Java since 2000, and with scala since 2012. I'm curious about storing and processing data. At work I had experience with [MongoDB](http://www.mongodb.com/), [Hadoop](https://hadoop.apache.org/)/[HBase](https://hbase.apache.org/) ([Cloudera CDH](http://www.cloudera.com/content/cloudera/en/products-and-services/cdh.html)), [Cassandra](http://cassandra.apache.org/) and with [MySQL](http://www.mysql.com/) and [Oracle](http://www.oracle.com/index.html).
 
-Except of working experience I experimented also with [Kafka](http://kafka.apache.org/) and [Samza](http://samza.incubator.apache.org/)
+Except this I experimented with [Kafka](http://kafka.apache.org/) and [Samza](http://samza.incubator.apache.org/).
 
-Also I touched Android a bit, created and published couple applications, [not so serious](https://play.google.com/store/apps/details?id=ru.forteamwork.dfc.a1), but was interesting.  
+Also, I touched Android a bit, created and published couple applications, [not so serious](https://play.google.com/store/apps/details?id=ru.forteamwork.dfc.a1), but it was interesting.  
 
-And I had setup and destroyed environment for CI process - [Jira](https://www.atlassian.com/software/jira) for ticket processing, [Confluence](https://www.atlassian.com/software/confluence) as documentation base, [Stash](https://www.atlassian.com/software/stash) to manage repository. Jenkins to create builds.  
+I had setup and destroyed environment for CI process - [Jira](https://www.atlassian.com/software/jira) was for ticket processing, [Confluence](https://www.atlassian.com/software/confluence) was used as documentation base, [Stash](https://www.atlassian.com/software/stash) was for managing repository. [Jenkins](http://jenkins-ci.org/) was setup to create builds and [nexus](http://www.sonatype.com/nexus) was for storing artifacts.  
 
-At work and in personal projects I use mostly [scala](http://scala-lang.org/) with [akka](http://akka.io/), [Intellij IDEA](https://www.jetbrains.com/idea/) as IDE, [Mercurial](http://mercurial.selenic.com/) as source control and different ticket trackers. Feel myself comfortable with [OS X](https://www.apple.com/osx/) and [Ubuntu](http://www.ubuntu.com/) as working environment.
+At work and in personal projects I use usualy [scala](http://scala-lang.org/), [Intellij IDEA](https://www.jetbrains.com/idea/) as IDE, [Mercurial](http://mercurial.selenic.com/) as source control and different ticket trackers. I feel myself comfortable with [OS X](https://www.apple.com/osx/) and [Ubuntu](http://www.ubuntu.com/) as working environment.
 
-Live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at "Home Office", flying to Russian and back again for 2-3 weeks per couple of months (and would prefer to keep some kind of such mobility because of serious personal reasons) 
+I live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at "Home Office", fly to Russian and back again for 2-3 weeks per couple of months (and would prefer to keep such mobility because of personal reasons) 
 
 ### More Information
 
