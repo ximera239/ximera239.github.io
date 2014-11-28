@@ -58,7 +58,7 @@ Live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at "H
 
   *Team leader* at [Alcatel-Lucent (Alcatel)](http://www.alcatel-lucent.com/)
   
-IPTV project. Team work management (works tracking, status control, risk management, consulting). Specifications updates.
+IPTV project. Team work management (works tracking, status control, risk management, consulting). Update specifications.
 
 * **04.2005 - 12.2005**
 
@@ -73,7 +73,7 @@ IPTV project. Team work management (works tracking, status control, risk managem
 #### Languages
 * Russian (native)
 * English (can write/talk... at least I hope so)
-* German (so-so, understand more or less but talking/writing is still real pain)
+* German (so-so, I understand more or less but talking/writing is still real pain)
 
 ### Contact me
 
