@@ -16,7 +16,7 @@ I had setup and destroyed environment for CI process - [Jira](https://www.atlass
 
 At work and in personal projects I use usualy [scala](http://scala-lang.org/), [Intellij IDEA](https://www.jetbrains.com/idea/) as IDE, [Mercurial](http://mercurial.selenic.com/) as source control and different ticket trackers. I feel myself comfortable with [OS X](https://www.apple.com/osx/) and [Ubuntu](http://www.ubuntu.com/) as working environment.
 
-I live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at "Home Office", fly to Russian and back again for 2-3 weeks per couple of months (and would prefer to keep such mobility because of personal reasons) 
+I live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at "Home Office", fly to Russia and back again for 2-3 weeks per couple of months (and would prefer to keep such mobility because of personal reasons) 
 
 ### More Information
 
