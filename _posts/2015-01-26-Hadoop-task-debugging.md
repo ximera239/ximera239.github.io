@@ -43,3 +43,8 @@ mapreduce.job.cache.files -> s"hdfs:///user/${HDFS.username}/scripts/upload_dump
 ~~~
 
 Hope, this will help me to get dump..
+
+
+Part 2.
+Task is regular and it is not clear if it was run after my changes on dumping. Same time I found [this](http://jason4zhu.blogspot.ru/2014/11/shuffle-error-by-java-lang-out-of-memory-error-java-heap-space.html)
+post about similar error
