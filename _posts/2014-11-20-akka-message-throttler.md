@@ -11,9 +11,9 @@ tags:
 
 ---
 
-Today, I found a solution in our sources for controlling akka messaging rps. Solution was with setting rps and Thread.sleep after each sending.
-I know about maxima "use things which helps to solve the problem", but I do not think, that many threads are good solution anyway. So I tried to write my own throttler, akka-style.
-Yes, I found [experimental](http://doc.akka.io/docs/akka/snapshot/contrib/throttle.html) feature in AKKA 2.4. Recently, I faced a situation when an experimental feature did not work. So my bicycle is the best ))
+Today, I found a solution in our codebase for controlling Akka messaging RPS (requests per second). The solution involved setting RPS and using Thread.sleep after each message sent.
+I know about the maxim "use things that help solve the problem," but I don't think that many threads are a good solution anyway. So I tried to write my own throttler, Akka-style.
+Yes, I found an [experimental](http://doc.akka.io/docs/akka/snapshot/contrib/throttle.html) feature in AKKA 2.4. Recently, I faced a situation when an experimental feature didn't work. So my own solution is the best ))
 
 ~~~ scala
 import akka.actor.{Actor, Props}
@@ -25,7 +25,7 @@ import scala.util.control.NonFatal
  * Class to limit some action in time. First use - to send actor messages with given RPS.
  * Because we rely on scheduler, we process actions in batches with size actionsAmount, so
  * frequency is average
- * (see akka.scheduler.tick-duration as possible bottleneck )
+ * (see akka.scheduler.tick-duration as possible bottleneck)
  *
  * actionsAmount - maximum amount of calls to throttledTransformation per tick (which is 1 second by default)
  * i1 - generates parameters for throttledTransformation
@@ -103,4 +103,4 @@ object Throttler {
       onError,
       tick))
 }
-~~~  
+~~~

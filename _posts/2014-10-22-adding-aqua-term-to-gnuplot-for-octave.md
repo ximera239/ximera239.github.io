@@ -1,5 +1,5 @@
 ---
-title: Adding aqua term to gnuplot (for octave)
+title: Adding Aqua Term to GNUplot (for Octave)
 author: Evgeny
 layout: post
 permalink: /2014-10-22-adding-aqua-term-to-gnuplot-for-octave/
@@ -11,7 +11,7 @@ tags:
   - ML
 
 ---
-During Octave tutorial I got an error:
+During the Octave tutorial, I encountered an error:
 
         octave:> hist(w)
 
@@ -19,7 +19,7 @@ During Octave tutorial I got an error:
                       ^
                  line 0: unknown or ambiguous terminal type; type just 'set terminal' for a list
 
-[This][1] helps me. See answer from mackuntu.
+[This solution][1] helped me. See the answer from mackuntu.
 
 ~~~ bash
 $ sudo ln -s /Library/Frameworks/AquaTerm.framework/Versions/A/AquaTerm /usr/local/lib/libaquaterm.dylib
