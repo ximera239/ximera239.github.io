@@ -10,6 +10,6 @@ tags:
   - Kafka
   - Scala
 ---
-Added project to [github][1]
+I've added the project to [GitHub][1]
 
  [1]: https://github.com/kafka-tools/kafka-logback-appender

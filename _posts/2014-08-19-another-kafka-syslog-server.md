@@ -9,13 +9,13 @@ tags:
   - Kafka
   - Scala
 ---
-Some time ago I saw on [this][1] (now it is dead) page &#8220;possible project&#8221; about storing syslog messages in Kafka. Quite fast I found [this][2] implementation.
+Some time ago I saw on [this page][1] (now defunct) a "possible project" about storing syslog messages in Kafka. I quickly found [this implementation][2].
 
 <!--more-->
 
-First of all I rewrote it to scala. During this process I found that project was written for early kafka release, so some fixes were required.
+First, I rewrote it in Scala. During this process, I discovered that the project was written for an early Kafka release, so some fixes were required.
 
-So protobuf model is the same. Other parts:
+The protobuf model remains the same. Here are the other parts:
 
 Encoder and decoder:
 
@@ -48,7 +48,7 @@ class SyslogMessageDecoder(props : kafka.utils.VerifiableProperties = null) exte
     try {
       SyslogProto.SyslogMessage.parseFrom(bytes)
     } catch {
-      case e: InvalidProtocolBufferException =&gt;
+      case e: InvalidProtocolBufferException =>
         log.error("Received unparseable message", e)
         null
     }
@@ -56,7 +56,7 @@ class SyslogMessageDecoder(props : kafka.utils.VerifiableProperties = null) exte
 }
 </pre>
 
-Event handler
+Event handler:
 
 <pre class="toolbar:1 lang:scala decode:true " title="KafkaEventHandler.scala">package ru.forteamwork.examples.kafka.syslog
 
@@ -102,7 +102,7 @@ class KafkaEventHandler(producer: Producer[String, SyslogMessage]) extends Syslo
 }
 </pre>
 
-And server.
+And the server:
 
 <pre class="toolbar:1 lang:scala decode:true" title="SyslogKafkaServer.scala">package ru.forteamwork.examples.kafka.syslog
 
@@ -124,7 +124,7 @@ object SyslogKafkaServer {
 
   def getDefaultKafkaProperties: Properties = {
     val props = new Properties()
-    for (entry &lt;- Environment.config.getConfig("syslog.kafka").entrySet()) {
+    for (entry <- Environment.config.getConfig("syslog.kafka").entrySet()) {
       props.put(entry.getKey, entry.getValue.unwrapped().toString)
     }
     props
@@ -155,7 +155,7 @@ object SyslogKafkaServer {
 }
 </pre>
 
-In server I tried to add some akka flavor &#8211; I added simple udp server implementation based on akka instead of using org.productivity.java.syslog4j.server.SyslogServer. It is simple. Has just two actors &#8211; one catchs UGP message and send it to another actor, who process data to kafka.
+In the server implementation, I tried to add some Akka flavor - I added a simple UDP server implementation based on Akka instead of using org.productivity.java.syslog4j.server.SyslogServer. It's simple. It has just two actors - one catches UDP messages and sends them to another actor, which processes the data to Kafka.
 
 <pre class="toolbar:1 lang:scala decode:true" title="Worker.scala">package ru.forteamwork.examples.kafka.syslog.udp
 
@@ -178,15 +178,15 @@ class Worker(config: UDPNetSyslogServerConfig) extends Actor {
   IO(Udp) ! Udp.Bind(self, new InetSocketAddress(config.getHost, config.getPort))
 
   def receive = {
-    case Udp.Bound(local) =&gt;
+    case Udp.Bound(local) =>
       context.become(ready(sender()))
   }
 
   def ready(socket: ActorRef): Receive = {
-    case Udp.Received(data, remote) =&gt;
+    case Udp.Received(data, remote) =>
       dataWorker ! SLMessage(data, remote)
-    case Udp.Unbind =&gt; socket ! Udp.Unbind
-    case Udp.Unbound =&gt; context.stop(self)
+    case Udp.Unbind => socket ! Udp.Unbind
+    case Udp.Unbound => context.stop(self)
   }
 }
 
@@ -211,15 +211,15 @@ import scala.collection.JavaConversions._
 
 class DataWorker(config: UDPNetSyslogServerConfig) extends Actor {
   def receive = {
-    case SLMessage(data, remote) =&gt;
+    case SLMessage(data, remote) =>
       val dataForJava = data.toArray[Byte]
       val processed = DataWorker.createEvent(config, dataForJava, dataForJava.length, remote.getAddress)
-      Option(processed.getHost).foreach(host =&gt; {
-        for (rawhandler &lt;- config.getEventHandlers) {
+      Option(processed.getHost).foreach(host => {
+        for (rawhandler <- config.getEventHandlers) {
           rawhandler match {
-            case handler: SyslogServerSessionlessEventHandlerIF =&gt;
+            case handler: SyslogServerSessionlessEventHandlerIF =>
               handler.event(null, remote, processed)
-            case handler: SyslogServerSessionEventHandlerIF =&gt;
+            case handler: SyslogServerSessionEventHandlerIF =>
               handler.event(null, null, remote, processed)
           }
         }
@@ -249,13 +249,13 @@ object DataWorker {
     isStructuredMessage0(syslogCharSet,SyslogUtility.newString(syslogCharSet, receiveData))
 
   def isStructuredMessage0(syslogCharSet: SyslogCharSetIF, receiveData: String) = {
-    val idx = receiveData.indexOf('&gt;')
-    // If there's a numerical VERSION field after the &lt;priority&gt;, return true.
-    idx != -1 && receiveData.length() &gt; idx + 1 && Character.isDigit(receiveData.charAt(idx + 1))
+    val idx = receiveData.indexOf('>')
+    // If there's a numerical VERSION field after the <priority>, return true.
+    idx != -1 && receiveData.length() > idx + 1 && Character.isDigit(receiveData.charAt(idx + 1))
   }
 }</pre>
 
-And server itself
+And the server itself:
 
 <pre class="toolbar:1 lang:scala decode:true">package ru.forteamwork.examples.kafka.syslog
 
