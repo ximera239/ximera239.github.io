@@ -13,9 +13,9 @@ This part is very simple.
 
 <!--more-->
 
-> Really simple? Or just now, after vacation? If I remember well &#8211; I spent some time to make it work..
+> Really simple? Or just seems so now, after vacation? If I remember correctly - I spent quite some time to make it work...
 
-We need serializers for key&value, partitioner, key class and appender itself. For my example I used LoggingEventVO class to serialize value (I would say that protobuf model is better alternative for serialization). Key &#8211; just our host who send message.
+We need serializers for key & value, a partitioner, a key class, and the appender itself. For my example, I used the LoggingEventVO class to serialize values (I would say that a protobuf model is a better alternative for serialization). The key is simply the hostname of the server that sends the message.
 
 <pre class="toolbar:1 lang:scala decode:true" title="ValueEncoder.scala">package ru.forteamwork.examples.kafka.logback.logger
 
@@ -46,7 +46,7 @@ Key class:
 case class Key(host: String)
 </pre>
 
-And Key serializer
+And Key serializer:
 
 <pre class="toolbar:1 lang:scala decode:true " title="KeyEncoder.scala">package ru.forteamwork.examples.kafka.logback.logger
 
@@ -60,11 +60,11 @@ class KeyEncoder(props: VerifiableProperties = null) extends scala.AnyRef with k
 }
 </pre>
 
-Partitioner
+Partitioner:
 
 <pre class="toolbar:1 lang:scala decode:true " title="Partitioner.scala">package ru.forteamwork.examples.kafka.logback.logger
 
-import kafka.producer.{Partitioner =&gt; P}
+import kafka.producer.{Partitioner => P}
 import kafka.utils.VerifiableProperties
 import ru.forteamwork.examples.kafka.logback
 
@@ -76,7 +76,7 @@ class Partitioner(props: VerifiableProperties = null) extends P() {
 }
 </pre>
 
-And, at last, appender
+And finally, the appender itself:
 
 <pre class="toolbar:1 lang:scala decode:true " title="KafkaAppender.scala">package ru.forteamwork.examples.kafka.logback
 
@@ -123,7 +123,7 @@ class KafkaAppender extends AppenderBase[ILoggingEvent] {
 }
 </pre>
 
-Using of appender will be:
+The appender can be used like this:
 
 <pre class="toolbar:1 nums:false lang:default decode:true" title="part of logback.xml">...
     &lt;appender name="LOG_KAFKA" class="ru.forteamwork.examples.kafka.logback.KafkaAppender"&gt;
@@ -132,5 +132,3 @@ Using of appender will be:
     &lt;/appender&gt;
 
 ...</pre>
-
-&nbsp;
