@@ -8,28 +8,28 @@ categories:
 tags:
   - stories
 ---
-Friend of mine owns company (buildings/constructions). Of cause with site. But really simple, just some information about different aspects of company and partners. Some time ago they changed their sysadmin (required for manufacture).  New one said that the site is ugly and awful and they as a serious company require new one. And, they are so lucky, that he (sysadmin) can create one. Just for some additional fixed price.<!--more-->
+A friend of mine owns a company (buildings/construction). Of course, they have a website, but it's really simple - just some information about different aspects of the company and its partners. Some time ago they changed their sysadmin (required for their operations). The new one said that the site is ugly and awful, and that they, as a serious company, require a new one. And, they are so lucky, because he (the sysadmin) can create one. Just for some additional fixed price.<!--more-->
 
-So I was asked if I can help them. Not making the site but what they need to ask. So some my thoughts on that I will write here.
+So I was asked if I could help them - not by making the site, but by advising what they need to ask. Here are some of my thoughts on that.
 
-First of all, if you are going to create new site, you need to understand what for you do that. *&#8220;Every similar company has nice site. We will use it for advertisement&#8221; *(here and later I will use cursive for received answers)
+First of all, if you are going to create a new site, you need to understand what it's for. *"Every similar company has a nice site. We will use it for advertisement"* (here and later I will use italics for their answers)
 
-Do you understand that you will need to fill information at the beginning and then add something later (e.g. if you have section &#8220;News&#8221; &#8211; somebody should regularly add something there). *&#8220;Really? Probably I will tell somebody to do this&#8221;*
+Do you understand that you will need to fill in information at the beginning and then add something later (e.g., if you have a "News" section - somebody should regularly add content there). *"Really? Probably I will tell somebody to do this"*
 
-Ok, who will do that? Do you have any obligations? *&#8220;He will do, sysadmin. No, just verbal agreement&#8221;*
+Ok, who will do that? Do you have any formal obligations from them? *"He will do it, the sysadmin. No, just a verbal agreement"*
 
-Ok, did you see any examples of his work? *&#8220;I will ask ….. No, no such example&#8221;*
+Ok, have you seen any examples of his work? *"I will ask... No, no such examples"*
 
-In my opinion it is a gamble. But you pay.. Only thing I can advice &#8211; control this work. So technically you need:
+In my opinion, this is a gamble. But you're paying... The only thing I can advise is to control this work. Technically, you need:
 
-1. Would be great to know before development what sections and materials will be presented
+1. It would be great to know before development what sections and materials will be presented
 
-2. You need source control. For example: https://bitbucket.org/ You can have there free private repo for your site. And using source control will allow you (or anybody who understand that) to see what was done on top of CMS which will be used. Commits should be regular - starting from clear CMS.
+2. You need source control. For example: https://bitbucket.org/ You can have a free private repo for your site there. Using source control will allow you (or anybody who understands it) to see what was done on top of the CMS which will be used. Commits should be regular - starting from the clean CMS installation.
 
-3. You should get clear instruction how to install the system. The best is that installation should be done not by developer.
+3. You should get clear instructions on how to install the system. The best scenario is that the installation should be done by someone other than the developer.
 
-4. I would say that with such agreements and obligations you should not have something like &#8220;Created by Mike Smith&#8217;s studio&#8221; anywhere on pages.
+4. I would say that with such agreements and obligations, you should not have something like "Created by Mike Smith's studio" anywhere on the pages.
 
-5. And decide, please, who will fill new site with information.
+5. And please decide who will fill the new site with information.
 
-P. S. I do not have experience in site development, so probably I missed something important. What else you can advice?
+P.S. I don't have experience in website development, so I probably missed something important. What else would you advise?
