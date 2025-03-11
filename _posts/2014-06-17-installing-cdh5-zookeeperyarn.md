@@ -12,42 +12,42 @@ tags:
   - YARN
   - ZooKeeper
 ---
-I would try to install Cloudera CDH5 on cluster. Will use [CDH5 installation guide][1]
+In this post, I'll document the process of installing Cloudera CDH5 on a cluster. I'll be following the [CDH5 installation guide][1].
 
 <!--more-->
 
 **Preparations**
 
-1. Install java7 on all nodes
+1. Install Java 7 on all nodes
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install yandex-jdk7
 </pre>
 
-alternatively [see][2]
+Alternatively, you can [follow these instructions][2].
 
-2. add CDH5 repos
+2. Add CDH5 repositories
 
 <pre class="toolbar:1 lang:sh decode:true" title="sudo vi /etc/apt/sources.list.d/cloudera.list">deb [arch=amd64] http://archive.cloudera.com/cdh5/ubuntu/precise/amd64/cdh precise-cdh5 contrib
 deb-src http://archive.cloudera.com/cdh5/ubuntu/precise/amd64/cdh precise-cdh5 contrib</pre>
 
-3. Add a repo key
+3. Add the repository key
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ curl -s http://archive.cloudera.com/cdh5/ubuntu/precise/amd64/cdh/archive.key | sudo apt-key add -</pre>
 
-4. Call update
+4. Update package lists
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get update</pre>
 
-(one of my nodes wrote huge amount of security errors, but as admins said &#8211; that&#8217;s ok, &#8220;this repo only for us&#8221;.. )
+(One of my nodes showed a large number of security errors, but our admins said that it's okay, "this repository is only for us"...)
 
-**Install and configure zookeeper**
+**Install and Configure ZooKeeper**
 
-1. Install
+1. Install ZooKeeper
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install zookeeper
 $ sudo apt-get install zookeeper-server</pre>
 
-2. Create zookeeper configuration file. For example /var/lib/zookeeper/zookeeper.conf
+2. Create the ZooKeeper configuration file, for example at /var/lib/zookeeper/zookeeper.conf
 
 <pre class="toolbar:1 lang:sh decode:true" title="sudo vi /var/lib/zookeeper/zookeeper.conf">tickTime=2000
 dataDir=/var/lib/zookeeper/
@@ -60,38 +60,38 @@ server.3=dev28i.vs.os.yandex.net:2888:3888
 
 </pre>
 
-3. Change owner:
+3. Change the owner:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo chown -R zookeeper /var/lib/zookeeper/</pre>
 
-4. Start each zookeeper (myid should be set accordingly step 6)
+4. Start each ZooKeeper instance (myid should be set according to step 6)
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo service zookeeper-server init --myid=1
 $ sudo service zookeeper-server start
 </pre>
 
-5. Test zookeeper  
-for example from node2 to node1:
+5. Test ZooKeeper  
+For example, from node2 to node1:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ zookeeper-client -server dev26i.vs.os.yandex.net:2181</pre>
 
-**Install CDH5 packages and set roles.**
+**Install CDH5 Packages and Set Roles**
 
-[YARN architecture][3]
+Following the [YARN architecture][3], I'll set up these roles:
 
-*   Node1: Resource manager host, DataNode host, NodeManager host, MapReduce
-*   Node2: NameNode host, DataNode host, NodeManager host, MapReduce
-*   Node3: Secondary NameNode host, DataNode host, NodeManager host, MapReduce, History server, Proxy server
+* Node1: Resource Manager host, DataNode host, NodeManager host, MapReduce
+* Node2: NameNode host, DataNode host, NodeManager host, MapReduce
+* Node3: Secondary NameNode host, DataNode host, NodeManager host, MapReduce, History server, Proxy server
 
-Node1
+Node1:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install hadoop-yarn-resourcemanager</pre>
 
-Node2
+Node2:
 
 <pre class="show-lang:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install hadoop-hdfs-namenode</pre>
 
-Node3
+Node3:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install hadoop-hdfs-secondarynamenode
 ...
@@ -104,13 +104,13 @@ at org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode.&lt;init&gt;(Seconda
 at org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode.main(SecondaryNameNode.java:651)
 invoke-rc.d: initscript hadoop-hdfs-secondarynamenode, action "start" failed.</pre>
 
-ok. will see
+I'll address this later.
 
-On Data nodes (all servers in our cluster. But in big cluster resource manager can be separate)
+On DataNodes (all servers in our cluster - in a larger cluster, the Resource Manager could be separate):
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install hadoop-yarn-nodemanager hadoop-hdfs-datanode hadoop-mapreduce</pre>
 
-on one server (for example on third)
+On one server (for example, on the third node):
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install hadoop-mapreduce-historyserver hadoop-yarn-proxyserver
 
@@ -121,18 +121,18 @@ invoke-rc.d: initscript hadoop-yarn-proxyserver, action "start" failed.
 
 </pre>
 
-on client hosts (for our case I will install on cluster&#8217;s servers)
+On client hosts (for our case, I'll install on the cluster's servers):
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo apt-get install hadoop-client</pre>
 
 Now deploying hosts:
 
-**Deploying HDFS on a Cluster** (from [here][4])  
+**Deploying HDFS on a Cluster** (from [this guide][4])  
 1. Copy the default configuration to your custom directory
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo cp -r /etc/hadoop/conf.empty /etc/hadoop/conf.my_cluster</pre>
 
-2. Set alternatives:
+2. Set alternatives:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.my_cluster 50
 $ sudo update-alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster</pre>
@@ -171,25 +171,25 @@ $ sudo update-alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster</pre>
   &lt;/property&gt;
 &lt;/configuration&gt;</pre>
 
-Create directories and set owner and permissions
+Create directories and set owner and permissions:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo mkdir -p /data/1/dfs/nn
 $ sudo mkdir -p /data/1/dfs/dn /data/2/dfs/dn /data/3/dfs/dn /data/4/dfs/dn
 $ sudo chown -R hdfs:hdfs /data/1/dfs/nn /data/1/dfs/dn /data/2/dfs/dn /data/3/dfs/dn /data/4/dfs/dn
 $ sudo chmod 700 /data/1/dfs/nn /data/1/dfs/dn /data/2/dfs/dn /data/3/dfs/dn /data/4/dfs/dn</pre>
 
-See [Setup NFS][5] post to see how to setup NFS
+See the [Setup NFS][5] post to learn how to set up NFS.
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo -u hdfs mkdir -p /nfsmount/dfs/nn
 $ sudo -u hdfs chmod 700 /nfsmount/dfs/nn</pre>
 
-4. Format NameNode
+4. Format the NameNode
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo -u hdfs hdfs namenode -format</pre>
 
-5. Configure secondary NameNode
+5. Configure the Secondary NameNode
 
-Add secondary namenode host (or hosts, one per line)
+Add the Secondary NameNode host (or hosts, one per line):
 
 <pre class="toolbar:1 lang:sh decode:true" title="sudo vi /etc/hadoop/conf.my_cluster/masters">dev28i.vs.os.yandex.net</pre>
 
@@ -201,7 +201,7 @@ Add secondary namenode host (or hosts, one per line)
     &lt;/description&gt;
   &lt;/property&gt;</pre>
 
-Set storage-balancing
+Set storage-balancing:
 
 <pre class="toolbar:1 lang:default decode:true" title="sudo vi hdfs-site.xml">&lt;property&gt;
     &lt;name&gt;dfs.datanode.fsdataset.volume.choosing.policy&lt;/name&gt;
@@ -216,9 +216,9 @@ Set storage-balancing
     &lt;value&gt;0.75&lt;/value&gt;
   &lt;/property&gt;</pre>
 
-**Start HDFS on cluster**
+**Start HDFS on the Cluster**
 
-1. Configure folders on second and third nodes (data node folders)
+1. Configure folders on the second and third nodes (DataNode folders):
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo mkdir -p /data/1/dfs/dn /data/2/dfs/dn /data/3/dfs/dn /data/4/dfs/dn
 $ sudo chown -R hdfs:hdfs /data/1/dfs/dn /data/2/dfs/dn /data/3/dfs/dn /data/4/dfs/dn
@@ -229,23 +229,23 @@ $ sudo chmod 700 /data/1/dfs/dn /data/2/dfs/dn /data/3/dfs/dn /data/4/dfs/dn</pr
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ scp -r /etc/hadoop/conf.my_cluster dev27i.vs.os.yandex.net:/etc/hadoop/conf.my_cluster
 $ scp -r /etc/hadoop/conf.my_cluster dev28i.vs.os.yandex.net:/etc/hadoop/conf.my_cluster</pre>
 
-3. Setup alternatives
+3. Set up alternatives on the other nodes:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.my_cluster 50
 $ sudo update-alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster</pre>
 
-4. Start hdfs
+4. Start HDFS:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do sudo service $x start ; done</pre>
 
-5. Create /tmp dir on hdfs
+5. Create a /tmp directory on HDFS:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo -u hdfs hadoop fs -mkdir /tmp
 $ sudo -u hdfs hadoop fs -chmod -R 1777 /tmp</pre>
 
 **Configure YARN**
 
-1. Add to mapred-site.xml
+1. Add to mapred-site.xml:
 
 <pre class="toolbar:1 lang:default decode:true" title="sudo vi mapred-site.xml">&lt;property&gt;
     &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
@@ -253,7 +253,7 @@ $ sudo -u hdfs hadoop fs -chmod -R 1777 /tmp</pre>
   &lt;/property&gt;
 </pre>
 
-2. Setup yarn-site.xml
+2. Set up yarn-site.xml:
 
 <pre class="toolbar:1 lang:default decode:true crayon-selected" title="sudo vi yarn-site.xml">&lt;configuration&gt;
   &lt;property&gt;
@@ -291,7 +291,7 @@ $ sudo -u hdfs hadoop fs -chmod -R 1777 /tmp</pre>
   &lt;property&gt;
     &lt;description&gt;Where to aggregate logs to.&lt;/description&gt;
     &lt;name&gt;yarn.nodemanager.remote-app-log-dir&lt;/name&gt;
-    &lt;!-- In Cloudera you can see: &lt;value&gt;hdfs://var/log/hadoop-yarn/apps&lt;/value&gt; but this is wrong --&gt;
+    &lt;!-- In Cloudera documentation you might see: &lt;value&gt;hdfs://var/log/hadoop-yarn/apps&lt;/value&gt; but this is wrong --&gt;
     &lt;value&gt;/var/log/hadoop-yarn/apps&lt;/value&gt;
   &lt;/property&gt;
 
@@ -308,7 +308,7 @@ $ sudo -u hdfs hadoop fs -chmod -R 1777 /tmp</pre>
   &lt;/property&gt;
 &lt;/configuration&gt;</pre>
 
-3. Setup folders and rights
+3. Set up folders and permissions:
 
 <pre class="toolbar:2 nums:false lang:sh highlight:0 decode:true">$ sudo mkdir -p /data/1/yarn/local /data/2/yarn/local /data/3/yarn/local /data/4/yarn/local
 $ sudo mkdir -p /data/1/yarn/logs /data/2/yarn/logs /data/3/yarn/logs /data/4/yarn/logs
@@ -316,7 +316,7 @@ $ sudo chown -R yarn:yarn /data/1/yarn/local /data/2/yarn/local /data/3/yarn/loc
 $ sudo chown -R yarn:yarn /data/1/yarn/logs /data/2/yarn/logs /data/3/yarn/logs /data/4/yarn/logs
 </pre>
 
-4. Configure history server in <samp class="ph codeph">mapred-site.xml</samp>
+4. Configure the History Server in <samp class="ph codeph">mapred-site.xml</samp>:
 
 <pre class="toolbar:1 lang:default decode:true" title="sudo vi mapred-site.xml">&lt;property&gt;
     &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;
@@ -328,7 +328,7 @@ $ sudo chown -R yarn:yarn /data/1/yarn/logs /data/2/yarn/logs /data/3/yarn/logs 
   &lt;/property&gt;
 </pre>
 
-5. Setup proxing in <samp class="ph codeph">core-site.xml</samp>
+5. Set up proxying in <samp class="ph codeph">core-site.xml</samp>:
 
 <pre class="toolbar:1 lang:default decode:true" title="sudo vi core-site.xml">&lt;property&gt;
     &lt;name&gt;hadoop.proxyuser.mapred.groups&lt;/name&gt;
@@ -339,28 +339,28 @@ $ sudo chown -R yarn:yarn /data/1/yarn/logs /data/2/yarn/logs /data/3/yarn/logs 
     &lt;value&gt;*&lt;/value&gt;
   &lt;/property&gt;</pre>
 
-6. Add staging dir in mapred-site.xml
+6. Add staging directory in mapred-site.xml:
 
 <pre class="toolbar:1 lang:default decode:true" title="sudo vi mapred-site.xml">&lt;property&gt;
     &lt;name&gt;yarn.app.mapreduce.am.staging-dir&lt;/name&gt;
     &lt;value&gt;/user&lt;/value&gt;
 &lt;/property&gt;</pre>
 
-7. Sync configurations over cluster
+7. Sync configurations across the cluster.
 
-8. Create history directory
+8. Create the history directory:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo -u hdfs hadoop fs -mkdir -p /user/history
 $ sudo -u hdfs hadoop fs -chmod -R 1777 /user/history
 $ sudo -u hdfs hadoop fs -chown mapred:hadoop /user/history
 </pre>
 
-9. Create log directory
+9. Create the log directory:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo -u hdfs hadoop fs -mkdir -p /var/log/hadoop-yarn
 $ sudo -u hdfs hadoop fs -chown yarn:mapred /var/log/hadoop-yarn</pre>
 
-10. Verifying file structure:
+10. Verify the file structure:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo -u hdfs hadoop fs -ls -R /
 
@@ -371,32 +371,32 @@ drwxr-xr-x   - hdfs   hadoop          0 2014-06-17 11:58 /var
 drwxr-xr-x   - hdfs   hadoop          0 2014-06-17 11:58 /var/log
 drwxr-xr-x   - yarn   mapred          0 2014-06-17 11:58 /var/log/hadoop-yarn</pre>
 
-11. Start/restart resource manager
+11. Start/restart the Resource Manager:
+
+<pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo service hadoop-yarn-resourcemanager start
+# or
+$ sudo service hadoop-yarn-resourcemanager restart</pre>
+
+12. Start/restart all NodeManagers:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo service hadoop-yarn-nodemanager start
-or
+# or
 $ sudo service hadoop-yarn-nodemanager restart</pre>
 
-12. Start/restart all NodeManagers
-
-<pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo service hadoop-yarn-nodemanager start
-or
-$ sudo service hadoop-yarn-nodemanager restart</pre>
-
-13. Start/restart history server
+13. Start/restart the History Server:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo service hadoop-mapreduce-historyserver start
-or
+# or
 $ sudo service hadoop-mapreduce-historyserver restart</pre>
 
-14. Add current user:
+14. Add the current user to HDFS:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ sudo -u hdfs hadoop fs -mkdir /user/$USER
 $ sudo -u hdfs hadoop fs -chown $USER /user/$USER</pre>
 
 &nbsp;
 
-Looks working
+Everything appears to be working correctly.
 
  [1]: http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH5/latest/CDH5-Installation-Guide/CDH5-Installation-Guide.html
  [2]: https://help.ubuntu.com/community/Java#Oracle_Java_7
