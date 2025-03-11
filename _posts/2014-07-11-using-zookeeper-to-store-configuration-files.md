@@ -10,11 +10,11 @@ tags:
   - Typesafe Config
   - ZooKeeper
 ---
-ZooKeeper is not only the module required by others (like Kafka or HBase), but also useful tool for development. For example, you can easily store project configurations there. And it is quite easy to implement.
+ZooKeeper is not only a module required by other systems (like Kafka or HBase), but also a useful tool for development. For example, you can easily store project configurations there. And it is quite easy to implement.
 
 <!--more-->
 
-We will use for that [Apache Curator][1] (ex NetFlix)
+For this purpose, we will use [Apache Curator][1] (formerly from Netflix)
 
 <pre class="toolbar:1 lang:default decode:true" title="Maven dependencies">...
         &lt;curator.version&gt;2.5.0&lt;/curator.version&gt;
@@ -58,7 +58,7 @@ We will use for that [Apache Curator][1] (ex NetFlix)
         &lt;/dependency&gt;
 ...</pre>
 
-And simple client will be:
+And a simple client will be:
 
 <pre class="toolbar:1 lang:scala decode:true" title="ConfigClient.scala">import java.io.{InputStream, File}
 
@@ -66,7 +66,7 @@ import org.apache.curator.framework.CuratorFrameworkFactory
 import org.apache.curator.retry.ExponentialBackoffRetry
 
 /**
- * Simple client to manage configuration files on specific base path
+ * Simple client to manage configuration files on a specific base path
  * User: Evgeny Zhoga &lt;ezhoga@yandex-team.ru&gt;
  * Date: 11.07.14
  */
@@ -121,14 +121,14 @@ class ConfigClient(base: String) {
     put(configNameInZookeeper,
       streamToConfigFileOnFS,
       overrideFlag,
-      org.apache.commons.io.IOUtils.toByteArray: InputStream =&gt; Array[Byte]
+      org.apache.commons.io.IOUtils.toByteArray: InputStream => Array[Byte]
     )
   }
   private def put[T] (
            configNameInZookeeper: String,
            configSource: T,
            overrideFlag: Boolean,
-           toByteArray: T =&gt; Array[Byte]
+           toByteArray: T => Array[Byte]
            ) {
     val exsts = exists(configNameInZookeeper)
     if (!overrideFlag && exsts) {
@@ -184,7 +184,7 @@ class ConfigClient(base: String) {
   }
 }</pre>
 
-My application.conf
+My application.conf:
 
 <pre class="toolbar:1 lang:default decode:true" title="application.conf">zookeeper {
   quorum = "dev26i.vs.os.yandex.net,dev27i.vs.os.yandex.net,dev28i.vs.os.yandex.net"
@@ -194,7 +194,7 @@ My application.conf
 }
 </pre>
 
-Now, client usage is simple
+Now, client usage is simple:
 
 <pre class="toolbar:2 nums:false lang:scala decode:true">// Put property file
 val client = new ConfigClient(ConfigFactory.load().getString("zookeeper.bde.basenode"))
@@ -204,6 +204,6 @@ client.get("test.properties", new File("/path/to/properties/dir"), "property_fil
 // And close it
 client.close()</pre>
 
-And so you have centralized storage for configurations.
+And now you have a centralized storage for configurations.
 
  [1]: http://curator.apache.org/
