@@ -8,14 +8,14 @@ categories:
 tags:
   - Typesafe Config
 ---
-Suddenly got problems with properties files loaded into typesafe config.
+I recently encountered problems with properties files loaded into Typesafe Config.
 
-In properties such syntax is ok:
+In properties files, this syntax is acceptable:
 
 <pre class="toolbar:1 lang:default decode:true" title="some.properties">foo.bar.var1=123
 foo.bar.var2=321
 foo.bar=${foo.bar.var2}</pre>
 
-Just because it is a mapping {key => value}
+This works because properties files are simply a mapping of {key => value}.
 
-But for typesafe config it is different. When loading &#8211; at first object **foo.bar **will be created with two fields: [var1, var2]. And then object will be overridden with string &#8220;${foo.bar.var2}&#8221;.
+However, for Typesafe Config, it's different. When loading, first an object **foo.bar** will be created with two fields: [var1, var2]. And then this object will be overridden with the string "${foo.bar.var2}".

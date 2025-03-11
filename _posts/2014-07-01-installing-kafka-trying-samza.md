@@ -13,7 +13,7 @@ tags:
   - YARN
   - ZooKeeper
 ---
-1. Download kafka
+1. Download Kafka
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ mkdir kafka
 $ cd kafka
@@ -23,28 +23,28 @@ $ cd kafka_2.10-0.8.1.1</pre>
 
 <!--more-->
 
-2. Update zookeeper properties
+2. Update ZooKeeper properties
 
-<pre class="toolbar:1 lang:default decode:true" title="vi config/server.properties">broker.id=&lt;unique id for node&gt;
+<pre class="toolbar:1 lang:default decode:true" title="vi config/server.properties">broker.id=<unique id for node>
 zookeeper.connect=dev26i.vs.os.yandex.net:2181,dev27i.vs.os.yandex.net:2181,dev28i.vs.os.yandex.net:2181</pre>
 
 3. Run it:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ bin/kafka-server-start.sh config/server.properties</pre>
 
-Now [Samza][1]
+Now let's set up [Samza][1]
 
-1. Publish samza to local maven repo
+1. Publish Samza to local Maven repository
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ git clone http://git-wip-us.apache.org/repos/asf/incubator-samza.git
 $ cd incubator-samza
 $ ./gradlew clean publishToMavenLocal</pre>
 
-2. Will try hello-samza project. Using [this][2]
+2. Try the hello-samza project using [this guide][2]
 
-Had some problems here: version of samsa libs was just [changed][3] to 0.8.0
+I encountered some problems here: the version of Samza libs had just [changed][3] to 0.8.0
 
-So I need to change:
+So I needed to make these changes:
 
 <pre class="toolbar:1 nums:false lang:default decode:true" title="vi hello-samza/pom.xml">...
   &lt;artifactId&gt;samza-example-parent&lt;/artifactId&gt;
@@ -56,7 +56,7 @@ So I need to change:
         &lt;version&gt;0.8.0&lt;/version&gt;
 ...
 
-and then all other "0.7.0" to "0.8.0-SNAPSHOT"
+and then change all other "0.7.0" to "0.8.0-SNAPSHOT"
 
 ...
     &lt;repository&gt;
@@ -69,7 +69,7 @@ and then all other "0.7.0" to "0.8.0-SNAPSHOT"
     &lt;/repository&gt;
 ..</pre>
 
-Added cloudera repo instead of apache because we use CDH5 YARN.
+I added the Cloudera repository instead of Apache because we use CDH5 YARN.
 
 <pre class="toolbar:1 nums:false lang:default decode:true" title="vi hello-samza/samza-job-package/pom.xml">&lt;parent&gt;
     &lt;groupId&gt;samza&lt;/groupId&gt;
@@ -93,90 +93,84 @@ And then:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">hello-samza$ mvn clean package</pre>
 
-3. By the way on this node I do not have hadoop-client. See [here][4] how to install
+3. Note that on this node I did not have hadoop-client. See [here][4] for installation instructions.
 
-4. Put tar.gz to HDFS
+4. Put the tar.gz to HDFS
 
-<pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ hadoop fs -put samza-job-package/target/samza-job-package-0.8.0-dist.tar.gz &lt;path on HDFS&gt;</pre>
+<pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ hadoop fs -put samza-job-package/target/samza-job-package-0.8.0-dist.tar.gz <path on HDFS></pre>
 
-5. And run the job
+5. Run the job
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ mkdir -p deploy/samza
 $ tar -xvf ./samza-job-package/target/samza-job-package-0.8.0-dist.tar.gz -C deploy/samza
 $ # set yarn path in deploy/samza/config/wikipedia-*.properties
 $ deploy/samza/bin/run-class.sh org.apache.samza.job.JobRunner --config-factory org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/deploy/samza/config/wikipedia-feed.properties</pre>
 
-And check in [hadoop][5] (??? problems??)
-
-and in Kafka
+Check in [Hadoop UI][5] and in Kafka:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ ~/kafka/kafka_2.10-0.8.1.1/bin/kafka-console-consumer.sh  --zookeeper dev27i.vs.os.yandex.net:2181 --topic wikipedia-raw</pre>
 
 &nbsp;
 
-&#8230;
+I was stuck here for a whole day. It didn't work. Here are the problems I found:
 
-And here I got stuck for whole day. It does not work.. Found problems:
-
-1. Tried &#8220;hand-made&#8221; feed with
+1. I tried the "hand-made" feed with:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ bin/produce-wikipedia-raw-data.sh -b dev30i.vs.os.yandex.net:9093 -z dev27i.vs.os.yandex.net:2181</pre>
 
-Does not work because of hardcoded paths to kafka. First I need to change paths to my installed kafka. But after that everything is ok. Kafka is working.. But what about YARN?
+It didn't work because of hardcoded paths to Kafka. First, I needed to change paths to my installed Kafka. After that, everything was OK. Kafka was working, but what about YARN?
 
-2. Checked YARN UI (on porn 8088). Found that samza job looks like:
+2. I checked the YARN UI (on port 8088). I found that the Samza job status was:
 
 STATE: ACCEPTED, FinalStatus: UNDEFINED, PROGRESS: stays as 0, Tracking UI: UNASSIGNED
 
-Then after some time it becomes FAILED.
+Then after some time it became FAILED.
 
-I went to Logs but cannot see them in UI. Got 404. I went on nodes which were marked as workers. And found that nodemanager is not running. Ups.. Restarted, rerun jobs and found again that nodemanager is not running.
+I tried to check the logs in the UI but got a 404 error. I went to the nodes that were marked as workers and found that the NodeManager was not running. I restarted it, reran the jobs, and found that the NodeManager stopped again.
 
-I went to nodemanager logs. Found there:
+In the NodeManager logs, I found:
 
 <pre class="toolbar:2 lang:default decode:true">...
 java.lang.IllegalArgumentException: Wrong FS: hdfs://var/log/hadoop-yarn/apps, expected: hdfs://dev27i.vs.os.yandex.net:8020
 ...</pre>
 
-WTF??
-
-After that I found that configuration mentioned in Cloudera installation manual was wrong:
+After investigating, I found that the configuration mentioned in the Cloudera installation manual was incorrect:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">yarn.nodemanager.remote-app-log-dir: hdfs://var/log/hadoop-yarn/apps</pre>
 
-But should be
+It should be:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">yarn.nodemanager.remote-app-log-dir: /var/log/hadoop-yarn/apps</pre>
 
-With cloudera setup nodemanager tries to start Application, failed with IllegalArgumentException on checkPath and shutdown after that!
+With the Cloudera setup, the NodeManager tried to start the Application, failed with an IllegalArgumentException on checkPath, and shut down!
 
-Ok at the end Application successfully started.
+After fixing this, the Application successfully started.
 
-3. But kafka consumer still shows nothing.
+3. However, the Kafka consumer still showed nothing.
 
-Just because in properties in package we uploaded to HDFS we did not change kafka broker urls. Ok, stop application in YARN, change properties, build package again, upload, and start application. And now everything is working! Hurrah!
+This was because in the properties file in the package we uploaded to HDFS, we hadn't changed the Kafka broker URLs. I stopped the application in YARN, changed the properties, built the package again, uploaded it, and started the application. Now everything worked! Success!
 
 &nbsp;
 
-Then rest of tutorial
+Then I followed the rest of the tutorial:
 
-1. Start wikipedia edits job (according [this][6])
+1. Started the Wikipedia edits job (according to [this guide][6]):
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ deploy/samza/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/deploy/samza/config/wikipedia-parser.properties</pre>
 
-and check
+and checked:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ ~/kafka/kafka_2.10-0.8.1.1/bin/kafka-console-consumer.sh  --zookeeper dev27i.vs.os.yandex.2181 --topic wikipedia-edits</pre>
 
-2. Start statistics calculations
+2. Started statistics calculations:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ deploy/samza/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/deploy/samza/config/wikipedia-stats.properties</pre>
 
-and check
+and checked:
 
 <pre class="toolbar:2 nums:false lang:default highlight:0 decode:true">$ ~/kafka/kafka_2.10-0.8.1.1/bin/kafka-console-consumer.sh  --zookeeper dev27i.vs.os.yandex.2181 --topic wikipedia-stats</pre>
 
-That&#8217;s all
+That's all!
 
  [1]: http://samza.incubator.apache.org/
  [2]: http://samza.incubator.apache.org/learn/tutorials/0.7.0/deploy-samza-job-from-hdfs.html

@@ -9,20 +9,20 @@ tags:
   - Scala
   - Typesafe Config
 ---
-We have a lot of configuration files in projects. Some of them are common &#8211; for all projects in department, some of them are specific for server groups. Common configurations are stored in properties files. Some projects use Typesafe [Config][1], some projects use only [Spring][2] properties loader.
+We have many configuration files in our projects. Some of them are common - shared across all projects in the department, while others are specific to server groups. Common configurations are stored in properties files. Some projects use Typesafe [Config][1], while others use only [Spring][2] properties loader.
 
 <!--more-->
 
-In our project we use Typesafe. Properties were before just plain values (so lots of same server names in common properties). And at last, our admins decided to change this. And start to use placeholders. And we (using) Typesafe, but with two layers (at bottom) with properties files with placeholders, found that placeholders are not resolved.
+In our project, we use Typesafe Config. Previously, our properties were just plain values (resulting in many duplicate server names in common properties). Recently, our admins decided to change this approach and started using placeholders. However, we discovered that when using Typesafe Config with two layers (with properties files containing placeholders at the bottom), the placeholders weren't being resolved.
 
-After some tries (reading Config sources and googling) I decided to write simple resolver. As soon as I did not found any working solution.
+After several attempts (reading Config sources and searching online), I decided to write a simple resolver since I couldn't find any working solution.
 
 <pre class="toolbar:2 lang:scala decode:true">object ConfigResolver {
   val regex = "(\\$\\{([\\w][\\w\\d_\\.\\-]*)\\}|\\$([\\w][\\w\\d_]*))".r
 
   def apply(original: Config, absentPlaceholders:scala.collection.mutable.HashSet[String] = new scala.collection.mutable.HashSet[String]): Config = {
     // we start to fill empty Config with resolved placeholders
-    val resolved = original.entrySet().foldLeft(ConfigFactory.empty())((r, entry) =&gt; {
+    val resolved = original.entrySet().foldLeft(ConfigFactory.empty())((r, entry) => {
       // only in case if type of value is string
       if (entry.getValue.valueType() == ConfigValueType.STRING) {
         val value = entry.getValue.unwrapped().toString
@@ -33,7 +33,7 @@ After some tries (reading Config sources and googling) I decided to write simple
           findAllMatchIn(value).
           //then replace all occurences with values from config
           foldLeft(value)(
-            (v, m) =&gt; {
+            (v, m) => {
               val full = m.group(1)
               val next = Option(m.group(2)).getOrElse(m.group(3))
               //but only if we previously did not detected that we do not have this placeholder in Config
@@ -71,13 +71,13 @@ After some tries (reading Config sources and googling) I decided to write simple
   }
 }</pre>
 
-Now loading happens:
+Now the loading happens like this:
 
 <pre class="toolbar:2 lang:scala decode:true">val p = {
     val conf = ConfigFactory.load()
     ConfigResolver(
       getLocaleName.fold(conf)(
-        specific =&gt;
+        specific =>
           ConfigFactory.load(
             ConfigFactory.parseFile(new File(s"/etc/server/$specific/file.properties")).
               withFallback(conf)
@@ -85,7 +85,7 @@ Now loading happens:
 
 &nbsp;
 
-If you know something not known to me about this problem &#8211; just tell me =)
+If you know something about this problem that I'm not aware of, please let me know! =)
 
  [1]: https://github.com/typesafehub/config
  [2]: http://spring.io
