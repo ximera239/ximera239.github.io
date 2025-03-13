@@ -38,7 +38,7 @@ I live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at 
 * 2014 Machine Learning, Andrew Ng, Coursera
  
 #### Working experience
-* **1.2014 – present** 
+* **1.2014 – 5.2015** 
 
   *SW Developer/Consultant (remote)* at [Yandex](http://www.yandex.ru/) 
 
@@ -64,7 +64,10 @@ IPTV project. Team work management (works tracking, status control, risk managem
 
   *SW Developer* at [Alcatel-Lucent (Alcatel)](http://www.alcatel-lucent.com/)
 
-  IPTV Application customization (development, bug fixing)Achievements: was promoted as a Team leader after 7 months of work.* **07.2001 - 04.2005**
+  IPTV Application customization (development, bug fixing)
+Achievements: was promoted as a Team leader after 7 months of work.
+
+* **07.2001 - 04.2005**
 
   *SW Developer* at [T-Systems CIS](http://www.t-systems.ru/)
 
