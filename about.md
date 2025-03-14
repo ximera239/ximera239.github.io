@@ -6,17 +6,9 @@ permalink: /about/
 ---
 Hi, my name is Evgeny.
 
-I have been working with Java since 2000, and with scala since 2012. I'm curious about storing and processing data. At work I had experience with [MongoDB](http://www.mongodb.com/), [Hadoop](https://hadoop.apache.org/)/[HBase](https://hbase.apache.org/) ([Cloudera CDH](http://www.cloudera.com/content/cloudera/en/products-and-services/cdh.html)), [Cassandra](http://cassandra.apache.org/) and with [MySQL](http://www.mysql.com/) and [Oracle](http://www.oracle.com/index.html).
+I have been working with Java since 2000, and with Scala since 2012. 
 
-Except this I experimented with [Kafka](http://kafka.apache.org/) and [Samza](http://samza.incubator.apache.org/).
-
-Also, I touched Android a bit, created and published couple applications, [not so serious](https://play.google.com/store/apps/details?id=ru.forteamwork.dfc.a1), but it was interesting.  
-
-I had setup and destroyed environment for CI process - [Jira](https://www.atlassian.com/software/jira) was for ticket processing, [Confluence](https://www.atlassian.com/software/confluence) was used as documentation base, [Stash](https://www.atlassian.com/software/stash) was for managing repository. [Jenkins](http://jenkins-ci.org/) was setup to create builds and [nexus](http://www.sonatype.com/nexus) was for storing artifacts.  
-
-At work and in personal projects I use usualy [scala](http://scala-lang.org/), [Intellij IDEA](https://www.jetbrains.com/idea/) as IDE, [Mercurial](http://mercurial.selenic.com/) as source control and different ticket trackers. I feel myself comfortable with [OS X](https://www.apple.com/osx/) and [Ubuntu](http://www.ubuntu.com/) as working environment.
-
-I live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at "Home Office", fly to Russia and back again for 2-3 weeks per couple of months (and would prefer to keep such mobility because of personal reasons) 
+I live in Germany and work for [FedEx](https://www.fedex.com/).
 
 ### More Information
 
@@ -24,60 +16,108 @@ I live in Germany, work for [Yandex](http://www.yandex.ru/) Saint-Petersburg at 
 **Main**
 
 * 1997-2001 St. Petersburg State Institute of Fine Mechanics and Optics, Computer Technologies and Controlling Systems, **Bachelor of Math**
-* 2001-2003 St. Petersburg State University of Information Technologies, Mechanics and Optics, Informational Technologies and Programming, **Master of applied Mathematics and Informatics**
+* 2001-2003 St. Petersburg State University of Information Technologies, Mechanics and Optics, Informational Technologies and Programming, **Master of Applied Mathematics and Informatics**
 * 2004-2005 International Management Institute St. Petersburg, **General Management, Manager**
 
 **Additional**
 
-* 2007 Planning and control of projects over use Microsoft Project 2000/2003, PM Experts, Certificate
-* 2007 Practical Methods on Effective Risk, Changes and Project Team Management. Based on Standard ANSI PMI PMBOK 3-rd Edition (2004), PM Experts, Certificate
-* 2007 UML business analysis and modeling, TEKAMA, Certificate
-* 2013 M101J: MongoDB for Java Developers, 10gen, The MongoDB Company, Ceriticate
-* 2013 M102: MongoDB for DBAs, 10gen, The MongoDB Company, Ceriticate
+* 2007 Planning and Control of Projects Using Microsoft Project 2000/2003, PM Experts, Certificate
+* 2007 Practical Methods for Effective Risk, Changes and Project Team Management. Based on Standard ANSI PMI PMBOK 3rd Edition (2004), PM Experts, Certificate
+* 2007 UML Business Analysis and Modeling, TEKAMA, Certificate
+* 2013 M101J: MongoDB for Java Developers, 10gen, The MongoDB Company, Certificate
+* 2013 M102: MongoDB for DBAs, 10gen, The MongoDB Company, Certificate
 * 2014 Functional Programming Principles in Scala, Martin Odersky, Coursera
 * 2014 Machine Learning, Andrew Ng, Coursera
  
-#### Working experience
-* **1.2014 – 5.2015** 
+#### Working Experience
+* **11.2023 – present** 
 
-  *SW Developer/Consultant (remote)* at [Yandex](http://www.yandex.ru/) 
+  *Senior SW Developer (remote)* at [FedEx](https://www.fedex.com/) 
 
-  SW developer and consultant in Revews project (reviews for vertical services Yandex.Auto, Yandex.Rabota, Yandex.Store, Yandex.Maps, Yandex.Kino, Yandex.City)
+  Joined a team developing a next-generation shipping application for FedEx. 
   
-  *scala, akka, hadoop/hbase, cassandra, mysql*
+  *Java, Spring, PostgreSQL, Azure*
+
+* **01.2021 – 10.2023** 
+
+  *Senior SW Developer (remote)* at [Nezasa](https://www.nezasa.com/) 
+
+  I was responsible for all hotel functionality for maintenance and development (both the dynamic part - search and booking, and the static part that I created previously). I implemented multiple integrations of new suppliers (via common switch API) and developed most of the second version for the hotels static data system. 
+  
+  *Scala, Akka, Play Framework, MongoDB, AWS*
+
+* **11.2019 – 12.2020** 
+
+  *SW Developer (remote)* at [Nezasa](https://www.nezasa.com/) 
+
+  I integrated two tour-operators' in-house offer search and booking systems (for hotels, activities, and transport). Then I built a system for collecting, unifying, and using hotel static data. All customers were successfully migrated to the new system. 
+  
+  *Scala, Akka, Play Framework, MongoDB, AWS*
+
+* **4.2018 – 10.2018** 
+
+  *SW Developer (remote)* at [Nezasa](https://www.nezasa.com/) 
+
+  I joined a team working on the RoundTrips add-on for BistroPortal by Traveltainment (software for tour operators).
+  
+  *Scala, Akka, Play Framework, MongoDB, AWS*
+
+* **4.2018 – 5.2022** 
+
+  *Maintenance Specialist (remote)* at [Appath](https://www.appath.com/) 
+
+  After the project's development was put on hold, I was responsible for maintenance and support of the system. 
+  
+  *Scala, Akka, Play Framework, MySQL*
+
+* **6.2016 – 4.2018** 
+
+  *CTO (remote)* at [Appath](https://www.appath.com/) 
+
+  Joined as a freelancer to help with a project, later was promoted to CTO. Developed and maintained a high-load distributed system for e-commerce.
+  
+  *Scala, Akka, Play Framework, MySQL*
+
+* **1.2014 – 5.2016** 
+
+  *SW Developer/Consultant (remote)* at [Yandex](https://www.yandex.ru/) 
+
+  SW developer and consultant for the Reviews project (reviews for vertical services including Yandex.Auto, Yandex.Rabota, Yandex.Store, Yandex.Maps, Yandex.Kino, Yandex.City).
+  
+  *Scala, Akka, Hadoop/HBase, Cassandra, MySQL*
 
 * **11.2010 - 1.2014** 
   
-  *SW Developer* at [Yandex](http://www.yandex.ru/)
+  *SW Developer* at [Yandex](https://www.yandex.ru/)
 
-  SW Developer in number of projects. Developed high-loaded distributed systems, with requirements of 24x7x365 availability.
+  SW Developer on numerous projects. Developed high-load distributed systems with 24x7x365 availability requirements.
 
-  *scala, akka, java, hadoop/hbase, mongodb, oracle, mysql*
+  *Scala, Akka, Java, Hadoop/HBase, MongoDB, Oracle, MySQL*
 
 * **12.2005 - 11.2010**
 
-  *Team leader* at [Alcatel-Lucent (Alcatel)](http://www.alcatel-lucent.com/)
+  *Team Leader* at [Alcatel-Lucent (Alcatel)](https://www.alcatel-lucent.com/)
   
-IPTV project. Team work management (works tracking, status control, risk management, consulting). Update specifications.
+  IPTV project. Managed team work (work tracking, status control, risk management, consulting). Updated specifications.
 
 * **04.2005 - 12.2005**
 
-  *SW Developer* at [Alcatel-Lucent (Alcatel)](http://www.alcatel-lucent.com/)
+  *SW Developer* at [Alcatel-Lucent (Alcatel)](https://www.alcatel-lucent.com/)
 
-  IPTV Application customization (development, bug fixing)
-Achievements: was promoted as a Team leader after 7 months of work.
+  IPTV Application customization (development, bug fixing).
+  Achievement: Promoted to Team Leader after 7 months of work.
 
 * **07.2001 - 04.2005**
 
-  *SW Developer* at [T-Systems CIS](http://www.t-systems.ru/)
+  *SW Developer* at [T-Systems CIS](https://www.t-systems.ru/)
 
-  SW development in number of projects.
+  SW development across numerous projects.
 
 #### Languages
 * Russian (native)
-* English (can write/talk... at least I hope so)
-* German (so-so, I understand more or less but talking/writing is still real pain)
+* English (can write/speak... at least I hope so)
+* German (intermediate, I understand more or less but speaking/writing is still challenging)
 
 ### Contact me
 
-[evgeny at zhoga.com](mailto:evgeny@zhoga.com)
+[Me on LinkedIn](https://www.linkedin.com/in/evgenyzhoga/)
